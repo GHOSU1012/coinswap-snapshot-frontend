@@ -1,8 +1,7 @@
 import { baseStrategy } from '../the-graph/baseStrategy';
-import { indexersStrategy } from './indexers';
 
-export const author = 'glmaljkovich';
-export const version = '1.0.1';
+export const author = 'davekaj';
+export const version = '0.1.0';
 
 export async function strategy(
   _space,
@@ -17,8 +16,7 @@ export async function strategy(
     network,
     _provider,
     addresses,
-    { strategyType: 'indexing', ..._options },
-    snapshot,
-    indexersStrategy
+    _options,
+    snapshot
   );
 }
