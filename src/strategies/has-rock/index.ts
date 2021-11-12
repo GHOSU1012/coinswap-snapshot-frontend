@@ -17,24 +17,34 @@ export async function strategy(
 ) {
   const blockTag = typeof snapshot === 'number' ? snapshot : 'latest';
 
-  const calls = [] as any;
-  for (let i = 0; i < 100; i++) {
-    calls.push([options.address, 'rocks', [i]]);
+  let calls = [] as  any;
+  for (var i=0; i< 100; i++){
+    calls.push([
+      options.address,
+      'rocks',
+      [i]
+    ])
   }
 
-  const response = await multicall(network, provider, abi, calls, { blockTag });
+  const response = await multicall(
+    network,
+    provider,
+    abi,
+    calls,
+    { blockTag }
+  );
 
-  const result = {} as any;
+  let result = {} as  any;
 
-  addresses.forEach((address) => {
+  addresses.forEach((address, x)=> {
     let addressRocks = 0;
-    response.forEach((rockObject) => {
-      if (rockObject.owner == address) {
-        addressRocks++;
-      }
-    });
-    result[address] = addressRocks;
-  });
+    response.forEach((rockObject, i) => {
+        if (rockObject.owner == address){
+          addressRocks++;
+        }
+    })
+    result[address] = addressRocks
+  })
 
   return result;
 }
