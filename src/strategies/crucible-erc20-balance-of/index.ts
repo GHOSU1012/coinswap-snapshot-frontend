@@ -1,10 +1,9 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { hexZeroPad } from '@ethersproject/bytes';
 import { formatUnits } from '@ethersproject/units';
 import { Multicaller } from '../../utils';
 
 export const author = 'thegostep';
-export const version = '0.1.1';
+export const version = '0.1.0';
 
 const abi = [
   'function balanceOf(address owner) external view returns (uint256)',
@@ -85,7 +84,7 @@ export async function strategy(
     walletIDToCrucibleAddresses
   )) {
     callCrucibleToLpBalance.call(walletID, options.erc20_address, 'balanceOf', [
-      hexZeroPad(crucibleAddress.toHexString(), 20)
+      crucibleAddress.toHexString()
     ]);
   }
   const walletIDToLpBalance: Record<

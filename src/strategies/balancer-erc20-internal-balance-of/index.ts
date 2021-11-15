@@ -5,9 +5,7 @@ import { Multicaller } from '../../utils';
 export const author = 'gerrrg';
 export const version = '0.0.1';
 
-const abi = [
-  'function getInternalBalance(address user, address[] tokens) external view returns (uint256[] balances)'
-];
+const abi = ['function getInternalBalance(address user, address[] tokens) external view returns (uint256[] balances)'];
 
 export async function strategy(
   space,
@@ -21,10 +19,7 @@ export async function strategy(
 
   const multi = new Multicaller(network, provider, abi, { blockTag });
   addresses.forEach((address) =>
-    multi.call(address, options.vault, 'getInternalBalance', [
-      address,
-      [options.token]
-    ])
+    multi.call(address, options.vault, 'getInternalBalance', [address, [options.token]])
   );
   const result: Record<string, BigNumberish> = await multi.execute();
 

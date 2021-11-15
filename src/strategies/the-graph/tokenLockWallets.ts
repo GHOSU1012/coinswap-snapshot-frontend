@@ -1,4 +1,3 @@
-import { Provider } from '@ethersproject/providers';
 import { subgraphRequest } from '../../utils';
 import { verifyResults } from './graphUtils';
 
@@ -12,17 +11,17 @@ interface TokenLockWallets {
   [key: string]: string[];
 }
 
-/**
+/*
   @dev Queries the subgraph to find if an address owns any token lock wallets
   @returns An object with the beneficiaries as keys and TLWs as values in an array 
 */
 export async function getTokenLockWallets(
-  _space: string,
-  network: string,
-  _provider: Provider,
-  addresses: string[],
-  options: Record<string, any>,
-  snapshot: string | number
+  _space,
+  network,
+  _provider,
+  addresses,
+  options,
+  snapshot
 ): Promise<TokenLockWallets> {
   const tokenLockParams = {
     tokenLockWallets: {
@@ -30,7 +29,7 @@ export async function getTokenLockWallets(
         where: {
           beneficiary_in: addresses
         },
-        first: options.pageSize
+        first: 1000
       },
       id: true,
       beneficiary: true

@@ -3,7 +3,7 @@ import { formatUnits } from '@ethersproject/units';
 import { Multicaller } from '../../utils';
 import examplesFile from './examples.json';
 
-export const author = 'CoinSwap-Space';
+export const author = 'coinswap';
 export const version = '0.0.1';
 export const examples = examplesFile;
 
@@ -41,7 +41,7 @@ export async function strategy(
   options,
   snapshot
 ): Promise<Record<string, number>> {
-  const blockTag = 'latest';
+  const blockTag = typeof snapshot === 'number' ? snapshot : 'latest';
 
   /*
     Balance in CSS token
